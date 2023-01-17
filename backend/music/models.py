@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Instrument type choices for User
 class InstrumentType(models.TextChoices):
@@ -17,9 +18,8 @@ class RoleType(models.TextChoices):
     Teacher = "Teacher"
 
 # Create your models here.
-class MusicUser(models.Model):
-    first_name = models.CharField(max_length=30, null=False)
-    last_name = models.CharField(max_length=30, null=False)
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     instrument = models.CharField(
         max_length = 50,
         choices = InstrumentType.choices,

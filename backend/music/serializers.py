@@ -3,5 +3,6 @@ from .models import MusicUser
 
 class MusicUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = MusicUser
+        model = UserProfile
+        # fields to return?
         fields = "__all__"
