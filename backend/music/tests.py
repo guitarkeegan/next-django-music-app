@@ -1,16 +1,21 @@
 from django.test import TestCase
-from myapp.models import UserProfile
+from music.models import UserProfile
+
 # Create your tests here.
+
+
 class UserProfileTestCase(TestCase):
-    
+
     def setup(self):
         '''
-        Able to create a new teacher and student.
+        Able to create a new teacher and student, 
+        then login
         '''
-        User.objects.create(
-            username="Brad Mehldau", 
+        self.user = User.objects.create_user(
+            username="Brad Mehldau",
             password="bumblebeessZZ!@#$asiiiUYhdf")
-        User.objects.create(
-            username="Joshua Redman", 
-            password="jiJIbbUna93437a83930384hdf7")
-        # self.assertEqual()
+        login = self.client.login(
+            username="Brad Mehldau", password="bumblebeessZZ!@#$asiiiUYhdf")
+        print(login)
+        self.assertEqual(login.username, "Brad Mehldau")
+
