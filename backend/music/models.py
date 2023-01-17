@@ -17,7 +17,7 @@ class RoleType(models.TextChoices):
     Teacher = "Teacher"
 
 # Create your models here.
-class User(models.Model):
+class MusicUser(models.Model):
     first_name = models.CharField(max_length=30, null=False)
     last_name = models.CharField(max_length=30, null=False)
     instrument = models.CharField(
