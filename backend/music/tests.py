@@ -1,6 +1,8 @@
 from django.test import TestCase
 from music.models import UserProfile
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+
 
 # Create your tests here.
 
@@ -43,9 +45,10 @@ class UserTestCase(TestCase):
         Should throw and error if role is not Student or Teacher
         '''
         new_user = User.objects.get(username="Brad Mehldau")
-        new_profile  = UserProfile.objects.create(
+        new_profile = UserProfile.objects.create(
             user=new_user,
             instrument="Piano",
             role="You lose!"
         )
+        
         

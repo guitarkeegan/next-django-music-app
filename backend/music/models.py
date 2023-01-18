@@ -27,7 +27,9 @@ class UserProfile(models.Model):
         default = InstrumentType.Other
     )
     role = models.CharField(
-        validators = [RegexValidator(r'Student|Teacher', message="Role must be Student or Teacher")]
+        # TODO: validator not checking properly
+        validators = [RegexValidator(r'Student|Teacher', message="Role must be Student or Teacher",
+        code="invalid role")],
         max_length = 30,
         choices = RoleType.choices,
         default = RoleType.Student
