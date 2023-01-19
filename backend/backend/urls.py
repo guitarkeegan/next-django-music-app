@@ -15,9 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+# use built in auth login views
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenVerifyView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('api/', include('music.urls')),
     path('api/', include('account.urls')),
+    # this will give back access and refresh tokens, this is a login essentially
+    path('api/token/', TokenObtainPairView.as_view()),
+    # this will be for the front end 👇
+    path('api/token/verify/', TokenVerifyView.as_view()),
+    
 ]
