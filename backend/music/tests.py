@@ -50,5 +50,4 @@ class UserTestCase(TestCase):
             instrument="Piano",
             role="You lose!"
         )
-        
-        
+        # this will still assign 'you lose' to role
