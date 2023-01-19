@@ -51,3 +51,7 @@ class UserTestCase(TestCase):
             role="You lose!"
         )
         # this will still assign 'you lose' to role
+
+
+
+class MessageTestCase(TestCase)

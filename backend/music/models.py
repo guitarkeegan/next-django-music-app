@@ -34,3 +34,15 @@ class UserProfile(models.Model):
         choices = RoleType.choices,
         default = RoleType.Student
     )
+
+class Message(models.Model):
+    message = models.TextField(),
+    #  TODO: Fix models relationship to include who sent it
+    sent_at = models.DateTimeField(auto_now_add=True)
+    recipient = models.ForeignKey(UserProfile, on_delete = models.CASCADE)
+    class Meta:
+        ordering = ['sent_at']
+
+        def __unicode__(self):
+            return self.title
+    
