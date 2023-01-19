@@ -37,9 +37,9 @@ class UserProfile(models.Model):
 
 class Message(models.Model):
     message = models.TextField(),
-    sender = models.ForeignKey(User, on_delete=models.CASCADE)
+    #  TODO: Fix models relationship to include who sent it
     sent_at = models.DateTimeField(auto_now_add=True)
-    recipient = models.ForeignKey(User, on_delete=models.CASCADE)
+    recipient = models.ForeignKey(UserProfile, on_delete = models.CASCADE)
     class Meta:
         ordering = ['sent_at']
 
