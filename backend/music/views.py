@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import UserProfile, Message
-from music.serializers import UserProfileSerializer
+from .models import Message
+from music.serializers import MusicMessageSerializer
 
 # Create your views here.
+
 @api_view(['GET'])
-def getAllUsers(request):
-    users = User.objects.all()
-    serializer = UserProfileSerializer(users, many=True)
+def getAllMessages(request):
+    messages = Message.objects.all()
+    serializer = MusicMessageSerializer(messages, many=True)
     
     return Response(serializer.data)

@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+# keegan-> changes this to fit messages
 urlpatterns = [
-    path('users/', views.getAllUsers, name='users')
+    path('messages/', views.getAllMessages, name='messages')
 ]
