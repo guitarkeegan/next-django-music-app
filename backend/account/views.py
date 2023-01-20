@@ -31,7 +31,7 @@ def register(request):
             )
             return Response({
                 'message': 'User Registerd.'},
-                status=status.HTTP_200_OK
+                status=status.HTTP_201_CREATED
             )
         else:
             return Response(

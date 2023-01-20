@@ -2,6 +2,9 @@ from django.test import TestCase
 from account.models import UserProfile
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from rest_framework.test import APITestCase
+from django.urls import reverse
+from rest_framework import status
 # Create your tests here.
 
 class UserTestCase(TestCase):
@@ -67,3 +70,21 @@ class UserTestCase(TestCase):
                 role="Student"
             )
         self.assertEqual(new_profile.instrument, "Piano")
+        
+class AuthTestCase(APITestCase):
+    
+    def test_create_user(self):
+        """
+        Ensure we can create a new user object.
+        """
+        url = reverse('register')
+        data = {
+            'first_name': 'Joshua', 
+            'last_name': 'Redman', 
+            'email': 'joshua@redman.com', 
+            'username': 'joshua@redman.com', 
+            'password': 'joshuaRedman123'}
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(User.objects.count(), 1)
+        self.assertEqual(User.objects.get().first_name, 'Joshua')
