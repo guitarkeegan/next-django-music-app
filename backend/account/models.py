@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
 
 # Instrument type choices for User
 class InstrumentType(models.TextChoices):
@@ -19,6 +19,10 @@ class RoleType(models.TextChoices):
     Teacher = "Teacher"
 
 # Create your models here.
+def role_validator(role):
+    if role != "Student" or role != "Teacher":
+        raise ValidationError(massage=f"Role must be either 'Student' or 'Teacher'. Inputted role was: {role}.")
+    
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='userprofile', on_delete=models.CASCADE)
     instrument = models.CharField(
@@ -28,8 +32,7 @@ class UserProfile(models.Model):
     )
     role = models.CharField(
         # TODO: validator not checking properly
-        validators = [RegexValidator(r'Student|Teacher', message="Role must be Student or Teacher",
-        code="invalid role")],
+        validators = [role_validator],
         max_length = 30,
         choices = RoleType.choices,
         default = RoleType.Student
