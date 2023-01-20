@@ -12,3 +12,4 @@ def getAllMessages(request):
     serializer = MusicMessageSerializer(messages, many=True)
     
     return Response(serializer.data)
+
