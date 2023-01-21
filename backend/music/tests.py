@@ -6,4 +6,8 @@ from django.core.exceptions import ValidationError
 
 
 
-class MessageTestCase(TestCase)
+from django.test import TestCase
+from music.models import Message
+
+class MessageTestCase(TestCase):
+    
