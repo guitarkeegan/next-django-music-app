@@ -1,5 +1,6 @@
 # Register your models here.
 from django.contrib import admin
-from .models import UserProfile
+from .models import Message
 
-admin.site.register(UserProfile)
+# Keegan-> I added this
+admin.site.register(Message)
