@@ -10,7 +10,7 @@ class LessonSerializer(serializers.ModelSerializer):
         model = Lesson
         fields = "__all__"
 
-class LesonCreationSerializer(serializers.ModelSerializer):
+class LessonCreationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         fields = ("title", "description", "author", "lesson_video", "lesson_photo")
