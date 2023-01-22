@@ -43,12 +43,14 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'rest_framework',
     "music.apps.MusicConfig",
+    "lessons.apps.LessonsConfig",
     "account.apps.AccountConfig",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -69,6 +71,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.media"
             ],
         },
     },
@@ -104,6 +107,8 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
 ]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = '/resources/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

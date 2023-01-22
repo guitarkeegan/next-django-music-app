@@ -15,14 +15,18 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Message',
+            name='Lesson',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('sent_at', models.DateTimeField(auto_now_add=True)),
-                ('recipient', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('title', models.CharField(max_length=200, null=True)),
+                ('description', models.TextField(null=True)),
+                ('created_on', models.DateField(auto_now_add=True)),
+                ('lesson_video', models.FileField(upload_to='resources/')),
+                ('lesson_photo', models.ImageField(upload_to='image-resources/')),
+                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
-                'ordering': ['sent_at'],
+                'ordering': ['created_on'],
             },
         ),
     ]
