@@ -63,7 +63,7 @@ def update_user(request):
 
     user.first_name = data['first_name']
     user.last_name = data['last_name']
-    user.username = data['email']
+    user.username = data['email'] # this is on purpose
     user.email = data['email']
 
     # check if password is not empty

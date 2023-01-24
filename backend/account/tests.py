@@ -2,7 +2,7 @@ from django.test import TestCase
 from account.models import UserProfile
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from rest_framework.test import APITestCase, force_authenticate, APIClient, APIRequestFactory
+from rest_framework.test import APITestCase, force_authenticate
 from django.urls import reverse
 from rest_framework import status
 from pprint import pprint
