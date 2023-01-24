@@ -4,6 +4,7 @@ from django.core.validators import RegexValidator
 
 
 class Message(models.Model):
+    # TODO: Get title to be displayed when viewing all message in admin
     title = models.CharField(max_length=200, null=True)
     message = models.TextField(null=True)
     #  TODO: Fix models relationship to include who sent it
