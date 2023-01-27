@@ -4,11 +4,14 @@ from django.core.validators import RegexValidator
 
 
 class Message(models.Model):
-    message = models.TextField(),
+    # TODO: Get title to be displayed when viewing all message in admin
+    title = models.CharField(max_length=200, null=True)
+    message = models.TextField(null=True)
     #  TODO: Fix models relationship to include who sent it
     sent_at = models.DateTimeField(auto_now_add=True)
-    # Keegan-> 'I changed this to User after moving the class to accounts'
-    recipient = models.ForeignKey(User, on_delete = models.CASCADE)
+    recipient = models.ForeignKey(User, on_delete = models.CASCADE, related_name='recipient', default="")
+    sender = models.ForeignKey(User, on_delete = models.CASCADE, related_name='sender', default="")
+    
     class Meta:
         ordering = ['sent_at']
 

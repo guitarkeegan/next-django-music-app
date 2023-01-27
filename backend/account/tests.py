@@ -2,9 +2,10 @@ from django.test import TestCase
 from account.models import UserProfile
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from rest_framework.test import APITestCase
+from rest_framework.test import APITestCase, force_authenticate
 from django.urls import reverse
 from rest_framework import status
+from pprint import pprint
 # Create your tests here.
 
 class UserTestCase(TestCase):
@@ -71,7 +72,7 @@ class UserTestCase(TestCase):
             )
         self.assertEqual(new_profile.instrument, "Piano")
         
-class AuthTestCase(APITestCase):
+class AuthCreateTestCase(APITestCase):
     
     def test_create_user(self):
         """
@@ -88,3 +89,37 @@ class AuthTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(User.objects.count(), 1)
         self.assertEqual(User.objects.get().first_name, 'Joshua')
+        
+class AuthTestCase(APITestCase):
+    
+    def setUp(self):
+        '''
+        create a new user
+        '''
+        self.user = User.objects.create_user(
+            first_name = "Brad",
+            last_name = "Mehldau",
+            email = "brad@mehldau.com",
+            username="brad@mehldau.com",
+            password="bumblebeessZZ!@#$asiiiUYhdf")
+        login = self.client.login(
+            username="brad@mehldau.com", password="bumblebeessZZ!@#$asiiiUYhdf")
+        
+        self.client.force_authenticate(self.user)
+        
+    def test_update_first_name(self):
+        '''
+        should be able to change first name if user has been authenticated
+        '''
+        url = reverse('update_user')
+        data = {
+            'username': 'brad@mehldau.com',
+            'first_name': 'Bootsy',
+            'last_name': 'Mehldau',
+            'email': 'brad@mehldau.com',
+            'password': 'bumblebeessZZ!@#$asiiiUYhdf'
+        }
+        response = self.client.put(url, data, format='json')
+        self.assertEqual(response.data['first_name'], 'Bootsy')
+        
+        
