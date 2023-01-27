@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* you can use tags in globals, this css applies to everypage */
 
 :root {
