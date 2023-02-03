@@ -1,4 +1,9 @@
+import Link from 'next/link'
+import {FC} from 'react'
 
+// interface FuncProps {
+//     setPage(page: String): void
+// }
 
 export default function Home(){
     return (
@@ -14,8 +19,8 @@ export default function Home(){
             <h1 className="text-6xl">Waveform</h1>
             <br/>
             <br/>
-            <p className="text-2xl max-w-[300px]">A place where students and teachers and share lesson materials and schedule meetings</p>
-            <button className="bg-lighterBackground rounded text-black py-1 px-2 mt-5 focus:bg-darkerBackground hover:bg-darkerBackground">Get Started</button>
+            <p className="text-2xl max-w-[300px] mb-5">A place where students and teachers and share lesson materials and schedule meetings</p>
+            <Link href={'/login'} className="bg-lighterBackground rounded text-black py-2 px-4 focus:bg-darkerBackground hover:bg-darkerBackground">Get Started</Link>
         </div>
        </div>
        </div>
