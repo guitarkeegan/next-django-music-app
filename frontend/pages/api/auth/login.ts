@@ -17,7 +17,7 @@ export default async function handler(
         const {username, password} = req.body;
 
         try {
-            const response = await axios.post(process.env.API_URL + '/api/token', {
+            const response = await axios.post(process.env.API_URL + '/api/token/', {
                 username,
                 password,
             },

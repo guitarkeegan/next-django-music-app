@@ -1,5 +1,7 @@
 import {createContext, SyntheticEvent, useContext, useState} from 'react';
 import type { ReactNode } from 'react';
+import axios from 'axios';
+import {useRouter} from 'next/router';
 
 type authContextType = {
     user: null | boolean;
@@ -24,15 +26,30 @@ type Props = {
 }
 
 export function AuthProvider({children}: Props){
+    const router = useRouter();
     const [user, setUser] = useState<boolean | null>(null);
 
-    const login = (loginUser: any) => {
+    const login = async (loginUser: any) => {
         console.log("Logging in user...");
         
         console.log(`username: ${loginUser.username}`);
         console.log(`password: ${loginUser.password}`);
+        const {username, password} = loginUser;
 
-        setUser(true);
+        try {
+            console.log("Post request to login route...");
+            const response = await axios.post('/api/auth/login', {
+                username,
+                password,
+            });
+            if (response.data.success){
+                setUser(true);
+                router.push('/');
+            }
+        } catch (error){
+            console.error(`Error on call to login api`, error);
+        }
+
     }
 
     const logout = (e: SyntheticEvent) => {
