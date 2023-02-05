@@ -3,8 +3,8 @@ import type { ReactNode } from 'react';
 
 type authContextType = {
     user: null | boolean;
-    login: (e: Event) => void;
-    logout: (e: Event) => void;
+    login: (userLogin: {username: string, password: string}) => void;
+    logout?: (e: SyntheticEvent) => void;
 }
 
 const authContextDefaultValues: authContextType = {
@@ -26,13 +26,16 @@ type Props = {
 export function AuthProvider({children}: Props){
     const [user, setUser] = useState<boolean | null>(null);
 
-    const login = (e: Event) => {
-        e.preventDefault();
+    const login = (loginUser: any) => {
         console.log("Logging in user...");
+        
+        console.log(`username: ${loginUser.username}`);
+        console.log(`password: ${loginUser.password}`);
+
         setUser(true);
     }
 
-    const logout = (e: Event) => {
+    const logout = (e: SyntheticEvent) => {
         e.preventDefault();
         console.log("Logging out user...")
         setUser(false);
