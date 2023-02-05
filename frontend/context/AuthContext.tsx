@@ -1,4 +1,4 @@
-import {createContext, SyntheticEvent, useContext, useState} from 'react';
+import {createContext, SyntheticEvent, useContext, useState, useEffect} from 'react';
 import type { ReactNode } from 'react';
 import axios from 'axios';
 import {useRouter} from 'next/router';
@@ -6,7 +6,7 @@ import {useRouter} from 'next/router';
 type authContextType = {
     user: null | boolean;
     login: (userLogin: {username: string, password: string}) => void;
-    logout?: (e: SyntheticEvent) => void;
+    logout: () => void;
 }
 
 const authContextDefaultValues: authContextType = {
@@ -29,6 +29,12 @@ export function AuthProvider({children}: Props){
     const router = useRouter();
     const [user, setUser] = useState<boolean | null>(null);
 
+    useEffect(() => {
+        if (!user) {
+          loadUser();
+        }
+      }, [user]);
+
     const login = async (loginUser: any) => {
         console.log("Logging in user...");
         
@@ -43,7 +49,8 @@ export function AuthProvider({children}: Props){
                 password,
             });
             if (response.data.success){
-                setUser(true);
+                
+                loadUser();
                 router.push('/');
             }
         } catch (error){
@@ -52,11 +59,34 @@ export function AuthProvider({children}: Props){
 
     }
 
-    const logout = (e: SyntheticEvent) => {
-        e.preventDefault();
-        console.log("Logging out user...")
-        setUser(false);
-    }
+    const loadUser = async () => {
+        try {
+    
+          const res = await axios.get("/api/auth/user");
+    
+          if (res.data.user) {
+            setUser(true);
+            // setUser(res.data.user);
+          }
+        } catch (error) {
+          setUser(null);
+          console.error("Error on load user context", error);
+        }
+      };
+
+      const logout = async () => {
+        try {
+            console.log("Logging out user...");
+            const res = await axios.post("/api/auth/logout");
+    
+            if (res.data.success) {
+                setUser(null);
+          }
+        } catch (error) {
+            setUser(null);
+            console.error("Error on context logout ", error);
+        }
+      };
 
     const value ={
         user,
