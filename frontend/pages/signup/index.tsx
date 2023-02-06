@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useForm } from 'react-hook-form';
+import { SyntheticEvent } from "react";
 
 import axios from "axios";
 
@@ -37,16 +38,20 @@ export default function SignUp() {
         }
     });
 
-    const onSubmit = async (e) => {
-        console.log(e)
-    };
+    
 
+    const onSubmit = async (e: SyntheticEvent) => {
+        e.preventDefault();
+        console.log("here is the event...");
+       
+
+    }
 
     const { errors } = formState;
 
     return (
-        <div>
-            <Layout>
+        <div className="absolute mt-64 left-0 right-0 mx-auto w-3/4 bg-darkerBackground py-6 px-3 text-2xl text-white rounded-md text-center md:w-1/4 md:px-6 sm:w-3/4">
+            <h1 className="mb-10 text-center">SignUp</h1>
                 <form onSubmit={handleSubmit((data) => console.log(data))}>
                     <input {
                         ...register('firstName', {
@@ -55,7 +60,7 @@ export default function SignUp() {
                                 message: 'First name is required'
                             }
                         })
-                    } placeholder="First Name"></input>
+                    } placeholder="First Name" className="bg-inherit mb-4"></input>
                     <input {
                         ...register('lastName', {
                             required: {
@@ -63,7 +68,7 @@ export default function SignUp() {
                                 message: 'Last name is required'
                             }
                         })
-                    } placeholder='Last Name'></input>
+                    } placeholder='Last Name' className="bg-inherit mb-4"></input>
                     <input {
                         ...register('email', {
                             required: {
@@ -71,7 +76,7 @@ export default function SignUp() {
                                 message: "Email is required",
                             }
                         })
-                    } type="email" placeholder="email@domain.com"></input>
+                    } type="email" placeholder="email@domain.com" className="bg-inherit mb-4"></input>
                     <input {
                         ...register("username", {
                             required: {
@@ -79,7 +84,7 @@ export default function SignUp() {
                                 message: "You must have a username to register"
                             }
                         })
-                    } placeholder="username"></input>
+                    } placeholder="username" className="bg-inherit mb-4"></input>
                     <input {
                         ...register("password", {
                             required: {
@@ -87,7 +92,7 @@ export default function SignUp() {
                                 message: "Password is a requried field",
                             }
                         })
-                    } type='password' pattern="[a-z0-9}{1,15}" title="Password should include no special characters"></input>
+                    } type='password' placeholder="password" pattern="[a-z0-9}{1,15}" title="Password should include no special characters" className="bg-inherit mb-3"></input>
                     <input {
                         ...register("role", {
                             required: {
@@ -96,7 +101,7 @@ export default function SignUp() {
                             }
                         })
                     }
-                    ></input>
+                    className="bg-inherit mb-4" placeholder="student or teacher"></input>
                     <input {
                         ...register("instrument", {
                             required: {
@@ -105,10 +110,10 @@ export default function SignUp() {
                             }
                         })
                     }
-                    ></input>
+                    className="bg-inherit mb-4" placeholder="instrument"></input>
+                    <button className="bg-lighterBackground rounded-lg text-black py-2 px-3" type="submit">Register</button>
 
                 </form>
-            </Layout>
         </div>
     )
 
