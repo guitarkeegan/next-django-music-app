@@ -1,5 +1,6 @@
-import {SyntheticEvent, useState} from 'react'
+import {useState} from 'react'
 import { useAuth } from '@/context/AuthContext';
+import type { SyntheticEvent } from 'react';
 
 export default function Login(){
 
