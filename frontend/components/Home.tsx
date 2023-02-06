@@ -20,7 +20,8 @@ export default function Home(){
             <br/>
             <br/>
             <p className="text-2xl max-w-[300px] mb-5">A place where students and teachers and share lesson materials and schedule meetings</p>
-            <Link href={'/login'} className="bg-lighterBackground rounded text-black py-2 px-4 focus:bg-darkerBackground hover:bg-darkerBackground">Get Started</Link>
+            <Link href={'/signup'} className="bg-lighterBackground rounded text-black py-2 px-4 focus:bg-darkerBackground hover:bg-darkerBackground hover:text-white">Get Started</Link>
+            <Link href={'/login'} className="bg-lighterBackground rounded text-black  ml-2 py-2 px-4 focus:bg-darkerBackground hover:bg-darkerBackground hover:text-white">Already a Member?</Link>
         </div>
        </div>
        </div>
