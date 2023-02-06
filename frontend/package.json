@@ -15,6 +15,7 @@
     "@types/react-dom": "18.0.10",
     "autoprefixer": "^10.4.13",
     "axios": "^1.2.5",
+    "context-api": "^0.0.2",
     "cookie": "^0.5.0",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.5",
@@ -25,5 +26,8 @@
     "react-toastify": "^9.1.1",
     "tailwindcss": "^3.2.4",
     "typescript": "4.9.4"
+  },
+  "devDependencies": {
+    "@types/cookie": "^0.5.1"
   }
 }
