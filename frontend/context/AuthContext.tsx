@@ -51,7 +51,8 @@ export function AuthProvider({children}: Props){
             if (response.data.success){
                 
                 loadUser();
-                router.push('/');
+                // TODO: Check if user is teacher or student and send to the approapriate dashboard
+                router.push('/dashboard/teacher');
             }
         } catch (error){
             console.error(`Error on call to login api`, error);
