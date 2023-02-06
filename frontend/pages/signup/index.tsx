@@ -1,23 +1,25 @@
 import { useRouter } from "next/router";
 import { useForm } from 'react-hook-form';
 
+import axios from "axios";
+
 
 import NextLink from 'next/link';
 import Layout from "@/components/layout/Layout";
 
 
-export default function SignUp(){
+export default function SignUp() {
     const router = useRouter();
 
-type FormValues = {
-    firstName: string,
-    lastName: string,
-    email: string,
-    username: string,
-    password: string,
-    role: string,
-    instrument: string,
-}
+    type FormValues = {
+        firstName: string,
+        lastName: string,
+        email: string,
+        username: string,
+        password: string,
+        role: string,
+        instrument: string,
+    }
 
 
 
@@ -35,7 +37,10 @@ type FormValues = {
         }
     });
 
-    
+    const onSubmit = async (e) => {
+        console.log(e)
+    };
+
 
     const { errors } = formState;
 
@@ -50,7 +55,7 @@ type FormValues = {
                                 message: 'First name is required'
                             }
                         })
-                    } placeholder= "First Name"></input>
+                    } placeholder="First Name"></input>
                     <input {
                         ...register('lastName', {
                             required: {
@@ -58,23 +63,23 @@ type FormValues = {
                                 message: 'Last name is required'
                             }
                         })
-                    } placeholder = 'Last Name'></input>
+                    } placeholder='Last Name'></input>
                     <input {
                         ...register('email', {
                             required: {
                                 value: true,
                                 message: "Email is required",
-                            } 
+                            }
                         })
                     } type="email" placeholder="email@domain.com"></input>
-                        <input {
-                            ...register("username", {
-                                required: {
-                                    value: true,
-                                    message: "You must have a username to register"
-                                }
-                            })
-                        } placeholder="username"></input>
+                    <input {
+                        ...register("username", {
+                            required: {
+                                value: true,
+                                message: "You must have a username to register"
+                            }
+                        })
+                    } placeholder="username"></input>
                     <input {
                         ...register("password", {
                             required: {
@@ -106,7 +111,7 @@ type FormValues = {
             </Layout>
         </div>
     )
-    
+
 
 
 }
