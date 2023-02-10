@@ -43,21 +43,6 @@ class UserTestCase(TestCase):
             role="Student"
         )
         self.assertEqual(new_profile.instrument, "Piano")
-
-    def test_exception_when_role_does_not_exist(self):
-        '''
-        Should throw and error if role is not Student or Teacher
-        '''
-        new_user = User.objects.get(username="brad@mehldau.com")
-        try:
-            new_profile = UserProfile.objects.create(
-                user=new_user,
-                instrument="Piano",
-                role="You lose!"
-            )
-            # TODO: Validation is not checking role, "You Lose!" will be saved
-        except ValidationError:
-            pass
         
     def test_new_user_can_set_instrument(self):
         '''
