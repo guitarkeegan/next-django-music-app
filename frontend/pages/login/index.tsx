@@ -34,7 +34,7 @@ export default function Login(){
 
     return (
         <div className="absolute mt-64 left-0 right-0 mx-auto w-3/4 bg-darkerBackground py-6 px-3 text-2xl text-white rounded-md text-center md:w-1/4 md:px-6 sm:w-3/4">
-            <h1 className="mb-10 text-center">{!user ? "Login" : "Logout"}</h1>
+            <h1 className="mb-10 text-center">Login</h1>
             <form onSubmit={handleSubmit}>
                 <label className="mb-2">email</label>
                 <br />

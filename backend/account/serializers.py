@@ -4,9 +4,10 @@ from rest_framework import serializers
 class UserSerializer(serializers.ModelSerializer):
     instrument = serializers.CharField(source="userprofile.instrument")
     role = serializers.CharField(source="userprofile.role")
+    relationship = serializers.CharField(source="userprofile.relationship")
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "email", "username", "instrument", "role")
+        fields = ("first_name", "last_name", "email", "username", "instrument", "role", "relationship")
 
 class SignUpSerializer(serializers.ModelSerializer):
     class Meta:

@@ -5,6 +5,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from .models import Lesson
 from lessons.serializers import LessonCreationSerializer
+from accounts.serializers import UserSerializer
 
 #create lesson
 @api_view(["POST"])
@@ -38,10 +39,24 @@ def create_lesson(request):
 
 
 
-# user to get lesson data
+# get all lessons by the teacher
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def getAllLessons(request):
+def get_all_lessons_teacher(request):
+    user = UserSerializer(request.user)
+    
+    lessons = Lesson.objects.all().filter(author=user.id)
+    serializer = LessonCreationSerializer(lessons, many=True)
+
+    return Response(serializer.data)
+
+# TODO: get all lessons given to the student
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_all_lessons_student(request):
+    user = UserSerializer(request.user)
+    # TODO: need to filter by their teacher
+    # right now would just return all lessons in the table
     lessons = Lesson.objects.all()
     serializer = LessonCreationSerializer(lessons, many=True)
 
