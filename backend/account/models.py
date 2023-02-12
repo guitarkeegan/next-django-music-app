@@ -31,3 +31,9 @@ class UserProfile(models.Model):
         choices = RoleType.choices,
         default = RoleType.Student
     )
+    relationship = models.ManyToManyField(
+        "self",
+        related_name="relationship_with",
+        symmetrical=False,
+        blank=True
+    )
